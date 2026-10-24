@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'providers/app_state.dart';
 import 'screens/splash_screen.dart';
+import 'services/supabase_service.dart';
 import 'theme/app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await SupabaseConfig.initialize();
+  } catch (e) {
+    debugPrint('Supabase init notice: $e');
+  }
   runApp(const ConnectlyApp());
 }
 
